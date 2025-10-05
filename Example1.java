@@ -109,5 +109,20 @@ public class Example1 {
         Optional<Map.Entry<String, Long>> max = cc.entrySet().stream().max((e1, e2) -> e1.getValue().compareTo(e2.getValue()));
         System.out.println(max.get());
 
+
+        List<Example1> hr = employees.stream().filter(c -> c.getDepartment().equals("HR")).sorted(Comparator.comparing(Example1::getName)).collect(Collectors.toList());
+        System.out.println(hr);
+
+        Map<String, Double> collect1 = employees.stream().collect(Collectors.groupingBy(e -> e.getDepartment(), Collectors.averagingDouble(d -> d.getSalary())));
+        System.out.println(collect1);
+
+        Map<String, Optional<Example1>> collect2 = employees.stream().collect(Collectors.groupingBy(c -> c.getDepartment(), Collectors.maxBy(Comparator.comparing(r -> r.getSalary()))));
+
+        System.out.println(collect2);
+
+
+        Example1 example2 = employees.stream().sorted(Comparator.comparingDouble(Example1::getSalary).reversed()).skip(1).findFirst().get();
+        System.out.println(example2);
+
     }
 }
