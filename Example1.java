@@ -103,5 +103,11 @@ public class Example1 {
         Map<String, Long> collect = employees.stream().collect(Collectors.groupingBy(Example1::getDepartment, Collectors.counting()));
         System.out.println(collect);
 
+
+        Map<String, Long> cc =employees.stream().collect(Collectors.groupingBy(Example1::getDepartment, Collectors.counting()));
+//        Optional<Map.Entry<String, Long>> max = cc.entrySet().stream().max(Map.Entry.comparingByValue());
+        Optional<Map.Entry<String, Long>> max = cc.entrySet().stream().max((e1, e2) -> e1.getValue().compareTo(e2.getValue()));
+        System.out.println(max.get());
+
     }
 }
