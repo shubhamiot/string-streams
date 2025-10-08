@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,5 +20,13 @@ public class QueueExample{
         p1.add(1);
         p1.forEach((Integer i) -> System.out.println(i));
 
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(null, null); // hascode 0
+        map.put(null,1);  //hascode 1
+        System.out.println("hascode " + map.hashCode());
+
+        List<String> list = Arrays.asList(null, "banana");
+//        Collections.sort(list);
+        Comparator.nullsFirst(Comparator.naturalOrder());
     }
 }
