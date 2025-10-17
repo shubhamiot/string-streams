@@ -8,7 +8,7 @@ public class Practice1 {
 
         List<Integer> integers = List.of(1, 3, 4, 5);
         Integer reduce = integers.stream()
-                .reduce(2, Integer::sum);
+                .reduce(3, Integer::sum);
         System.out.println(reduce);
 
 
@@ -29,7 +29,7 @@ public class Practice1 {
         System.out.println(s2);
 
         //count vowel in string
-        String s3 = "inteview";
+        String s3 = "intevieww";
         long count = countvowels(s3);
         System.out.println("vowel"+ count);
         long count1 = coutConsonet(s3);
@@ -80,6 +80,28 @@ public class Practice1 {
         boolean checkAnagram = chechAnagram(s12, s13);
         System.out.println("anagram" + checkAnagram);
 
+
+        //find word having vowe in it max 2
+        String s14 = "java is god for programming";
+        List<String> strings = checkVowelContainingWord(s14);
+        System.out.println("vowel word:"+ strings.toString());
+    }
+
+    private static List<String> checkVowelContainingWord(String s14) {
+
+        String[] split = s14.split("\\s+");
+        String vowel = "aeiou";
+        List<String> collect = Arrays.stream(split)
+                .filter(c -> countVowelInString(c,vowel) == 2)
+                .collect(Collectors.toList());
+        return collect;
+    }
+
+    private static long countVowelInString(String c, String vowel) {
+
+        return c.toLowerCase().chars()
+                .filter(c1 -> vowel.indexOf(c1)!=-1)
+                .count();
     }
 
     private static boolean chechAnagram(String s12, String s13) {
@@ -100,7 +122,7 @@ public class Practice1 {
     }
 
     private static String longestWordInSting(String s8) {
-        Optional<String> reduce = Arrays.stream(s8.split(" ")).reduce((a, b) -> a.length() > b.length() ? a : b);
+        Optional<String> reduce = Arrays.stream(s8.split(" ")).max(Comparator.comparing(String::length));
         return reduce.get();
     }
 
@@ -159,14 +181,14 @@ public class Practice1 {
     private static long coutConsonet(String s3) {
 
         return s3.chars()
-                .filter(c -> "aeious".indexOf(c)<=0)
+                .filter(c -> "aeious".indexOf(c)==-1)
                 .count();
     }
 
     private static long countvowels(String s3) {
 
         return s3.chars()
-                .filter(c -> "aeiou".indexOf(c) >= 0)
+                .filter(c -> "aeiou".indexOf(c) != -1)
                 .count();
     }
 
