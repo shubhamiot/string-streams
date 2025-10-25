@@ -3,6 +3,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Pracrice2 {
 
@@ -66,5 +67,21 @@ public class Pracrice2 {
         ForkJoinTask<?> submit = f.submit(() -> integers.parallelStream().forEach(c -> System.out.println(c)));
         Object o = submit.get();
         System.out.println(o.toString());
+
+        String department = employees.stream().collect(Collectors.groupingBy(c -> c.getDepartment(), Collectors.counting()))
+                .entrySet()
+                .stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+
+        System.out.println(department);
+
+
+        List<List<Integer>> lists = Arrays.asList(Arrays.asList(1,3,4), Arrays.asList(5,6,7), Arrays.asList(7,4));
+
+        List<Integer> l = lists.stream()
+                .flatMap(List::stream).collect(Collectors.toList());
+        l.forEach(c -> System.out.println(c));
     }
 }

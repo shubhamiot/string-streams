@@ -1,10 +1,14 @@
 import javax.imageio.stream.FileImageOutputStream;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BreakSingleTonSerializable implements Serializable {
 
     private static BreakSingleTonSerializable instance ;
+    private BreakSingleTonSerializable(){
+
+    }
 
     public static BreakSingleTonSerializable getInstance(){
         if(instance == null){
