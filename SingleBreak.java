@@ -5,6 +5,12 @@ public class SingleBreak {
 
     private static SingleBreak instance;
 
+    // to avoind reflection singleton break
+    private SingleBreak(){
+        if(instance!=null){
+            throw new RuntimeException();
+        }
+    }
     private static SingleBreak getInstance(){
         if(instance == null){
             synchronized (SingleBreak.class){
